@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<orderList>
+     <order name="2">
+          <label name="Place number: ">8</label>
+          <label name="Surname: ">popov</label>
+          <label name="Flight number: ">3122</label>
+          <label name="Check in online: ">false</label>
+          <label name="Payment: ">true</label>
+     </order>
+</orderList>
