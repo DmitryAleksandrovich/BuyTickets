@@ -38,11 +38,10 @@ public:
 private:
 	class OrderingSystemState* current;
 	int placeNumber;
-	int orderNumber;
 	std::string surname;
 	int flightNumber;
 	bool checkIn;
-	bool tichetPayment;
+	bool ticketPayment;
 	bool ticketCancel;
 	int ticketPrice;
 };

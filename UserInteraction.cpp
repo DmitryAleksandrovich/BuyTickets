@@ -30,7 +30,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 			cin >> str;
 			if(str == "0")
 			{
-				cout << "Select a seat from 1 to maxNumberOrder: ";
+				cout << "Select a seat from 1 to 10: ";
 				cin >> pNumber;
 				cout << "Enter your surname: ";
 				cin >> str;
@@ -70,16 +70,16 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 					{
 						cout << "Ticket price is 200 dollars. Do you realy want to pay the ticket (Y/N)?\n";
 						cin >> str;
-						if(str == "Y")
+						if(str == "Y" || str == "y")
 						{
-							state = stateZero;
+							state = stateOne;
 							ob.SetTicketPayment(true);
 							ob.SetTicketCancel(false);
 							ob.PayBooking();
 							ob.AddPayXml();
 							cout << "Thank you for your order!\n";
 						}
-						else if(str == "N")
+						else if(str == "N" || str == "n")
 						{
 							break;
 						}
@@ -185,7 +185,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 						cout << "If you cancel the order then you will get 150 dollars back. " 
 							 << "Do you realy want to cancel the ticket (Y/N)?\n";
 						cin >> str;
-						if(str == "Y")
+						if(str == "Y" || str == "y")
 						{
 							busyPlace.erase(busyPlace.end()-1);
 							state = stateTwo;
@@ -195,7 +195,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 							ob.AddCancelXml();
 							cout << "Thank you! You cancel the order!\n";
 						}
-						else if(str == "N")
+						else if(str == "N" || str == "n")
 						{
 							break;
 						}
@@ -372,7 +372,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 					{
 						cout << "Ticket price is 200 dollars. Do you realy want to pay the ticket (Y/N)?\n";
 						cin >> str;
-						if(str == "Y")
+						if(str == "Y" || str == "y")
 						{
 							state = stateOne;
 							ob.SetTicketPayment(true);
@@ -381,7 +381,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 							ob.AddPayXml();
 							cout << "Thank you for your order!\n";
 						}
-						else if(str == "N")
+						else if(str == "N" || str == "n")
 						{
 							break;
 						}
@@ -401,7 +401,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 						cout << "If you cancel the order then you will get 150 dollars back. " 
 							 << "Do you realy want to cancel the ticket (Y/N)?\n";
 						cin >> str;
-						if(str == "Y")
+						if(str == "Y" || str == "y")
 						{
 							busyPlace.erase(busyPlace.end()-1);
 							state = stateTwo;
@@ -411,7 +411,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 							ob.AddCancelXml();
 							cout << "Thank you! You cancel the order!\n";
 						}
-						else if(str == "N")
+						else if(str == "N" || str == "n")
 						{
 							break;
 						}
@@ -502,7 +502,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 					{
 						cout << "Ticket price is 200 dollars. Do you realy want to pay the ticket (Y/N)?\n";
 						cin >> str;
-						if(str == "Y")
+						if(str == "Y" || str == "y")
 						{
 							state = stateOne;
 							ob.SetTicketPayment(true);
@@ -511,7 +511,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 							ob.AddPayXml();
 							cout << "Thank you for your order!\n";
 						}
-						else if(str == "N")
+						else if(str == "N" || str == "y")
 						{
 							break;
 						}
@@ -531,7 +531,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 						cout << "If you cancel the order then you will get 150 dollars back. " 
 							 << "Do you realy want to cancel the ticket (Y/N)?\n";
 						cin >> str;
-						if(str == "Y")
+						if(str == "Y" || str == "y")
 						{
 							busyPlace.erase(busyPlace.end()-1);
 							state = stateTwo;
@@ -541,7 +541,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 							ob.AddCancelXml();
 							cout << "Thank you! You cancel the order!\n";
 						}
-						else if(str == "N")
+						else if(str == "N" || str == "n")
 						{
 							break;
 						}

@@ -38,15 +38,28 @@ void OrderingSystemState::HistoryOrder(OrderingTickets* tPtr)
 
 void OrderingSystemState::DisplayHistory()
 {
-	std::string XML_PATH1 = "HistoryOrder.xml";
-	boost::property_tree::ptree propertyTree;
-    boost::property_tree::read_xml(XML_PATH1, propertyTree);
-	boost::property_tree::ptree inventoryTree = propertyTree.get_child("orderList.order");
+	using boost::property_tree::ptree;
+	ptree pt;
+	boost::property_tree::read_xml("HistoryOrder.xml", pt, boost::property_tree::xml_parser::trim_whitespace);
 	std::cout << "\nShow history order\n";
-	BOOST_FOREACH(auto &v, inventoryTree)
-	{
-		std::cout << v.second.get<std::string>("") << '\n';
-	}
+	BOOST_FOREACH(ptree::value_type &v, pt.get_child("orderList"))
+    {
+		if (v.first == "order" &&  v.second.get<std::size_t>("<xmlattr>.number") == 2)
+		{
+			std::cout << "Place number: " << v.second.get<std::string>("Place_number") << '\n'
+				<< "Surname: " << v.second.get<std::string>("Surname") << '\n'
+				<< "Flight number: " << v.second.get<std::string>("Flight_number") << '\n'
+				<< "Check in online: " << v.second.get<std::string>("Check_in_online") << '\n';
+			if (const boost::optional<std::string>optionalTicketPayment = v.second.get_optional<std::string>("Ticket_payment"))
+			{
+				std::cout << "Tichet payment: " << optionalTicketPayment.get() << '\n';
+			}
+			if (const boost::optional<std::string>optionalTicketCancel = v.second.get_optional<std::string>("Ticket_cancel"))
+			{
+				std::cout << "Tichet payment: " << optionalTicketCancel.get() << '\n';
+			}
+		}
+    }
 }
 
 

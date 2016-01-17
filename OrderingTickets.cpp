@@ -5,10 +5,9 @@
 OrderingTickets::OrderingTickets()
 {
 	placeNumber = std::rand() % 10 + 1;
-	orderNumber = 1;
-	flightNumber = 3122;
+	flightNumber = 312;
 	checkIn = false;
-	tichetPayment = false;
+	ticketPayment = false;
 	ticketCancel = false;
 	ticketPrice = 0;
 	current = new AcceptanceOrder();
@@ -20,114 +19,85 @@ OrderingTickets::~OrderingTickets()
 
 void OrderingTickets::AddOrderXml()
 {
-    boost::property_tree::ptree pt;
-
-    boost::property_tree::ptree orderListNode;
-    boost::property_tree::ptree orderNode;
-    boost::property_tree::ptree labelNode1;
-    boost::property_tree::ptree labelNode2;
-    boost::property_tree::ptree labelNode3;
-    boost::property_tree::ptree labelNode4;
-
-    labelNode1.put("<xmlattr>.name", "Place number: ");
-	labelNode1.put("", placeNumber);
-    labelNode2.put("<xmlattr>.name", "Surname: ");
-	labelNode2.put("", surname);
-    labelNode3.put("<xmlattr>.name", "Flight number: ");
-	labelNode3.put("", flightNumber);
-    labelNode4.put("<xmlattr>.name", "Check in online: ");
-	labelNode4.put("", checkIn);
-
-    orderNode.add_child("label", labelNode1);
-    orderNode.add_child("label", labelNode2);
-    orderNode.add_child("label", labelNode3);
-    orderNode.add_child("label", labelNode4);
-
-    orderNode.put("<xmlattr>.name", orderNumber);
-
-    orderListNode.add_child("order", orderNode);
-    pt.add_child("orderList", orderListNode);
+    using boost::property_tree::ptree;
+	ptree pt, ptAccessory;
+	boost::property_tree::read_xml("HistoryOrder.xml", pt, boost::property_tree::xml_parser::trim_whitespace);
+	BOOST_FOREACH(auto &v, pt)
+	{
+		ptAccessory.put("<xmlattr>.number", v.second.size()+1);
+		v.second.add_child("order", ptAccessory);
+		BOOST_FOREACH(ptree::value_type &p, v.second)
+		{
+			if (p.second.get<std::size_t>("<xmlattr>.number") == v.second.size())
+			{
+				p.second.add("Place_number", placeNumber);
+				p.second.add("Surname", surname);
+				p.second.add("Flight_number", flightNumber);
+				if(checkIn == false)
+				{
+					p.second.add("Check_in_online", "No");
+				}
+				else if(checkIn == true)
+				{
+					p.second.add("Check_in_online", "Yes");
+				}
+			}
+		}
+	}
     write_xml("HistoryOrder.xml", pt, std::locale(),
-		boost::property_tree::xml_writer_make_settings<boost::property_tree::ptree::key_type>(' ', 4u));
-	orderNumber++;
+		boost::property_tree::xml_writer_make_settings<ptree::key_type>(' ', 4u));
 }
 
 void OrderingTickets::AddPayXml()
 {
-    boost::property_tree::ptree pt;
-
-    boost::property_tree::ptree orderListNode;
-    boost::property_tree::ptree orderNode;
-    boost::property_tree::ptree labelNode1;
-    boost::property_tree::ptree labelNode2;
-    boost::property_tree::ptree labelNode3;
-    boost::property_tree::ptree labelNode4;
-	boost::property_tree::ptree labelNode5;
-
-    labelNode1.put("<xmlattr>.name", "Place number: ");
-	labelNode1.put("", placeNumber);
-    labelNode2.put("<xmlattr>.name", "Surname: ");
-	labelNode2.put("", surname);
-    labelNode3.put("<xmlattr>.name", "Flight number: ");
-	labelNode3.put("", flightNumber);
-    labelNode4.put("<xmlattr>.name", "Check in online: ");
-	labelNode4.put("", checkIn);
-	labelNode5.put("<xmlattr>.name", "Payment: ");
-	labelNode5.put("", tichetPayment);
-
-    orderNode.add_child("label", labelNode1);
-    orderNode.add_child("label", labelNode2);
-    orderNode.add_child("label", labelNode3);
-    orderNode.add_child("label", labelNode4);
-	orderNode.add_child("label", labelNode5);
-
-    orderNode.put("<xmlattr>.name", orderNumber);
-
-    orderListNode.add_child("order", orderNode);
-    pt.add_child("orderList", orderListNode);
+    using boost::property_tree::ptree;
+	ptree pt;
+	boost::property_tree::read_xml("HistoryOrder.xml", pt, boost::property_tree::xml_parser::trim_whitespace);
+	BOOST_FOREACH(auto &v, pt)
+	{
+		BOOST_FOREACH(ptree::value_type &p, v.second)
+		{
+			if (p.second.get<std::size_t>("<xmlattr>.number") == v.second.size())
+			{
+				if(ticketPayment == false)
+				{
+					p.second.put("Ticket_payment", "No");
+				}
+				else if(ticketPayment == true)
+				{
+					p.second.put("Ticket_payment", "Yes");
+				}
+			}
+		}
+	}
     write_xml("HistoryOrder.xml", pt, std::locale(),
-		boost::property_tree::xml_writer_make_settings<boost::property_tree::ptree::key_type>(' ', 5u));
+		boost::property_tree::xml_writer_make_settings<ptree::key_type>(' ', 4u));
 }
 
 void OrderingTickets::AddCancelXml()
 {
-    boost::property_tree::ptree pt;
-
-    boost::property_tree::ptree orderListNode;
-    boost::property_tree::ptree orderNode;
-    boost::property_tree::ptree labelNode1;
-    boost::property_tree::ptree labelNode2;
-    boost::property_tree::ptree labelNode3;
-    boost::property_tree::ptree labelNode4;
-	boost::property_tree::ptree labelNode5;
-	boost::property_tree::ptree labelNode6;
-
-    labelNode1.put("<xmlattr>.name", "Place number: ");
-	labelNode1.put("", placeNumber);
-    labelNode2.put("<xmlattr>.name", "Surname: ");
-	labelNode2.put("", surname);
-    labelNode3.put("<xmlattr>.name", "Flight number: ");
-	labelNode3.put("", flightNumber);
-    labelNode4.put("<xmlattr>.name", "Check in online: ");
-	labelNode4.put("", checkIn);
-	labelNode5.put("<xmlattr>.name", "Payment: ");
-	labelNode5.put("", tichetPayment);
-	labelNode5.put("<xmlattr>.name", "Cancel booking: ");
-	labelNode5.put("", ticketCancel);
-
-    orderNode.add_child("label", labelNode1);
-    orderNode.add_child("label", labelNode2);
-    orderNode.add_child("label", labelNode3);
-    orderNode.add_child("label", labelNode4);
-	orderNode.add_child("label", labelNode5);
-	orderNode.add_child("label", labelNode6);
-
-    orderNode.put("<xmlattr>.name", orderNumber);
-
-    orderListNode.add_child("order", orderNode);
-    pt.add_child("orderList", orderListNode);
+    using boost::property_tree::ptree;
+	ptree pt;
+	boost::property_tree::read_xml("HistoryOrder.xml", pt, boost::property_tree::xml_parser::trim_whitespace);
+	BOOST_FOREACH(auto &v, pt)
+	{
+		BOOST_FOREACH(ptree::value_type &p, v.second)
+		{
+			if (p.second.get<std::size_t>("<xmlattr>.number") == v.second.size())
+			{
+				if(ticketCancel == false)
+				{
+					p.second.put("Ticket_cancel", "No");
+				}
+				else if(ticketCancel == true)
+				{
+					p.second.put("Ticket_cancel", "Yes");
+				}
+			}
+		}
+	}
     write_xml("HistoryOrder.xml", pt, std::locale(),
-		boost::property_tree::xml_writer_make_settings<boost::property_tree::ptree::key_type>(' ', 6u));
+		boost::property_tree::xml_writer_make_settings<ptree::key_type>(' ', 4u));
 }
 
 void OrderingTickets::SetCheckIn(std::string const& str)
@@ -147,7 +117,7 @@ void OrderingTickets::SetCheckIn(std::string const& pNumber, std::string const& 
 
 void OrderingTickets::SetTicketPayment(bool tPayment)
 {
-	tichetPayment = tPayment;
+	ticketPayment = tPayment;
 }
 
 void OrderingTickets::SetTicketCancel(bool tCancel)
@@ -212,7 +182,7 @@ bool OrderingTickets::GetCheckIn() const
 
 bool OrderingTickets::GetTicketPayment() const
 {
-	return tichetPayment;
+	return ticketPayment;
 }
 
 bool OrderingTickets::GetTicketCancel() const
