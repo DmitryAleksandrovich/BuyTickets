@@ -34,7 +34,7 @@ void DisplayOrder::CancelBooking(OrderingTickets* tPtr)
 
 void DisplayOrder::HistoryOrder(OrderingTickets* tPtr)
 {
-	DisplayHistory();
+	DisplayHistory(tPtr);
 
 	tPtr->SetCurrent(new ShowHistoryOrder());
 	delete this;

@@ -1,10 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <orderList>
-     <order name="2">
-          <label name="Place number: ">8</label>
-          <label name="Surname: ">popov</label>
-          <label name="Flight number: ">3122</label>
-          <label name="Check in online: ">false</label>
-          <label name="Payment: ">true</label>
-     </order>
+    <order number="1">
+        <Place_number>2</Place_number>
+        <Surname>Popov</Surname>
+        <Flight_number>312</Flight_number>
+        <Check_in_online>No</Check_in_online>
+    </order>
+    <order number="2">
+        <Place_number>8</Place_number>
+        <Surname>Petrov</Surname>
+        <Flight_number>312</Flight_number>
+        <Check_in_online>No</Check_in_online>
+    </order>
+    <order number="3">
+        <Place_number>5</Place_number>
+        <Surname>Ivanov</Surname>
+        <Flight_number>312</Flight_number>
+        <Check_in_online>No</Check_in_online>
+    </order>
+    <order number="4">
+        <Place_number>1</Place_number>
+        <Surname>Sidorov</Surname>
+        <Flight_number>312</Flight_number>
+        <Check_in_online>No</Check_in_online>
+    </order>
+    <order number="5">
+        <Place_number>10</Place_number>
+        <Surname>Petuhov</Surname>
+        <Flight_number>312</Flight_number>
+        <Check_in_online>No</Check_in_online>
+        <Ticket_payment>Yes</Ticket_payment>
+    </order>
 </orderList>

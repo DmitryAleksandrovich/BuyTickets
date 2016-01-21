@@ -12,31 +12,31 @@ OrderingSystemState::~OrderingSystemState()
 
 void OrderingSystemState::MakeOrder(OrderingTickets* tPtr)
 {
-	std::cout << "Already MakeOrder\n";
+	std::cout << "Already Make Order\n";
 }
 
 void OrderingSystemState::PayBooking(OrderingTickets* tPtr)
 {
-	std::cout << "Already PayBooking\n";
+	std::cout << "Already Pay Booking\n";
 }
 
 void OrderingSystemState::CancelBooking(OrderingTickets* tPtr)
 {
-	std::cout << "Already CancelBooking\n";
+	std::cout << "Already Cancel Booking\n";
 }
 
 void OrderingSystemState::ShowOrder(OrderingTickets* tPtr)
 {
-	std::cout << "Already ShowOrder\n";
+	std::cout << "Already Show Order\n";
 }
 
 
 void OrderingSystemState::HistoryOrder(OrderingTickets* tPtr)
 {
-	std::cout << "Already HistoryOrder\n";
+	std::cout << "Already History Order\n";
 }
 
-void OrderingSystemState::DisplayHistory()
+void OrderingSystemState::DisplayHistory(OrderingTickets* tPtr)
 {
 	using boost::property_tree::ptree;
 	ptree pt;
@@ -44,7 +44,7 @@ void OrderingSystemState::DisplayHistory()
 	std::cout << "\nShow history order\n";
 	BOOST_FOREACH(ptree::value_type &v, pt.get_child("orderList"))
     {
-		if (v.first == "order" &&  v.second.get<std::size_t>("<xmlattr>.number") == 2)
+		if (v.first == "order" &&  v.second.get<std::size_t>("<xmlattr>.number") == tPtr->GetPlaceNumberForHistory())
 		{
 			std::cout << "Place number: " << v.second.get<std::string>("Place_number") << '\n'
 				<< "Surname: " << v.second.get<std::string>("Surname") << '\n'

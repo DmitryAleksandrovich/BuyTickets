@@ -9,12 +9,12 @@ OrderingTickets::OrderingTickets()
 	checkIn = false;
 	ticketPayment = false;
 	ticketCancel = false;
-	ticketPrice = 0;
 	current = new AcceptanceOrder();
 }
 
 OrderingTickets::~OrderingTickets()
 {
+	delete current;
 }
 
 void OrderingTickets::AddOrderXml()
@@ -102,7 +102,6 @@ void OrderingTickets::AddCancelXml()
 
 void OrderingTickets::SetCheckIn(std::string const& str)
 {
-	placeNumber = std::rand() % 10 + 1;
 	surname = str;
 	checkIn = false;
 }
@@ -128,6 +127,11 @@ void OrderingTickets::SetTicketCancel(bool tCancel)
 void OrderingTickets::SetPlaceNumber(int pNumber)
 {
 	placeNumber = pNumber;
+}
+
+void OrderingTickets::SetPlaceNumberForHistory(int pNumberForHistory)
+{
+	placeNumberForHistory = pNumberForHistory;
 }
 
 void OrderingTickets::SetCurrent(OrderingSystemState* tPtr)
@@ -173,6 +177,11 @@ std::string OrderingTickets::GetSurname() const
 int OrderingTickets::GetFlightNumber() const
 {
 	return flightNumber;
+}
+
+int OrderingTickets::GetPlaceNumberForHistory() const
+{
+	return placeNumberForHistory;
 }
 
 bool OrderingTickets::GetCheckIn() const

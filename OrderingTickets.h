@@ -25,13 +25,14 @@ public:
 	void SetTicketPayment(bool tPayment);
 	void SetTicketCancel(bool tCancel);
 	void SetPlaceNumber(int pNumber);
+	void SetPlaceNumberForHistory(int pNumberForHistory);
 	int GetPlaceNumber() const;
 	std::string GetSurname() const;
 	int GetFlightNumber() const;
 	bool GetCheckIn() const;
 	bool GetTicketPayment() const;
 	bool GetTicketCancel() const;
-	int GetTicketPrice() const;
+	int GetPlaceNumberForHistory() const;
 	void AddOrderXml();
 	void AddPayXml();
 	void AddCancelXml();
@@ -43,6 +44,6 @@ private:
 	bool checkIn;
 	bool ticketPayment;
 	bool ticketCancel;
-	int ticketPrice;
+	int placeNumberForHistory;
 };
 

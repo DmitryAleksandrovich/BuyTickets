@@ -17,6 +17,6 @@ public:
 	virtual void CancelBooking(OrderingTickets* tPtr);
 	virtual void ShowOrder(OrderingTickets* tPtr);
 	virtual void HistoryOrder(OrderingTickets* tPtr);
-	void DisplayHistory();
+	void DisplayHistory(OrderingTickets* tPtr);
 };
 

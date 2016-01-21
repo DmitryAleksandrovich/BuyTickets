@@ -33,13 +33,31 @@ void AcceptanceOrder::ShowOrder(OrderingTickets* tPtr)
 		std::cout << "Check in offline\n";
 	}
 
+	if(tPtr->GetTicketPayment() == true)
+	{
+		std::cout << "Ticket payment: Yes\n";
+	}
+	else if(tPtr->GetTicketPayment() == false)
+	{
+		std::cout << "Ticket payment: No\n";
+	}
+
+	if(tPtr->GetTicketCancel() == true)
+	{
+		std::cout << "Ticket cancel: Yes\n";
+	}
+	else if(tPtr->GetTicketCancel() == false)
+	{
+		std::cout << "Ticket cancel: No\n";
+	}
+
 	tPtr->SetCurrent(new DisplayOrder());
 	delete this;
 }
 
 void AcceptanceOrder::HistoryOrder(OrderingTickets* tPtr)
 {
-	DisplayHistory();
+	DisplayHistory(tPtr);
 
 	tPtr->SetCurrent(new ShowHistoryOrder());
 	delete this;
