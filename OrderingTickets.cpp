@@ -4,12 +4,11 @@
 
 OrderingTickets::OrderingTickets()
 {
-	placeNumber = std::rand() % 10 + 1;
-	flightNumber = 312;
+	placeNumber = std::rand() % maxNumberOrder + 1;
 	checkIn = false;
 	ticketPayment = false;
 	ticketCancel = false;
-	current = new AcceptanceOrder();
+	current = new AcceptanceOrder(); // The initial state
 }
 
 OrderingTickets::~OrderingTickets()
@@ -20,16 +19,18 @@ OrderingTickets::~OrderingTickets()
 void OrderingTickets::AddOrderXml()
 {
     using boost::property_tree::ptree;
-	ptree pt, ptAccessory;
+	ptree pt, ptAccessory; // Create variable to store the tree structure
+	/* Read XML and it write in variable "pt" */
 	boost::property_tree::read_xml("HistoryOrder.xml", pt, boost::property_tree::xml_parser::trim_whitespace);
 	BOOST_FOREACH(auto &v, pt)
 	{
-		ptAccessory.put("<xmlattr>.number", v.second.size()+1);
-		v.second.add_child("order", ptAccessory);
+		ptAccessory.put("<xmlattr>.number", v.second.size()+1); // Add order number
+		v.second.add_child("order", ptAccessory); // Add order
 		BOOST_FOREACH(ptree::value_type &p, v.second)
 		{
 			if (p.second.get<std::size_t>("<xmlattr>.number") == v.second.size())
 			{
+				/* Add fields in order */
 				p.second.add("Place_number", placeNumber);
 				p.second.add("Surname", surname);
 				p.second.add("Flight_number", flightNumber);
@@ -44,6 +45,7 @@ void OrderingTickets::AddOrderXml()
 			}
 		}
 	}
+	/* Update XML */
     write_xml("HistoryOrder.xml", pt, std::locale(),
 		boost::property_tree::xml_writer_make_settings<ptree::key_type>(' ', 4u));
 }
@@ -51,7 +53,8 @@ void OrderingTickets::AddOrderXml()
 void OrderingTickets::AddPayXml()
 {
     using boost::property_tree::ptree;
-	ptree pt;
+	ptree pt;// Create variable to store the tree structure
+	/* Read XML and it write in variable "pt" */
 	boost::property_tree::read_xml("HistoryOrder.xml", pt, boost::property_tree::xml_parser::trim_whitespace);
 	BOOST_FOREACH(auto &v, pt)
 	{
@@ -59,6 +62,7 @@ void OrderingTickets::AddPayXml()
 		{
 			if (p.second.get<std::size_t>("<xmlattr>.number") == v.second.size())
 			{
+				/* Add field "Ticket_payment" in order */
 				if(ticketPayment == false)
 				{
 					p.second.put("Ticket_payment", "No");
@@ -70,6 +74,7 @@ void OrderingTickets::AddPayXml()
 			}
 		}
 	}
+	/* Update XML */
     write_xml("HistoryOrder.xml", pt, std::locale(),
 		boost::property_tree::xml_writer_make_settings<ptree::key_type>(' ', 4u));
 }
@@ -77,7 +82,8 @@ void OrderingTickets::AddPayXml()
 void OrderingTickets::AddCancelXml()
 {
     using boost::property_tree::ptree;
-	ptree pt;
+	ptree pt;// Create variable to store the tree structure
+	/* Read XML and it write in variable "pt" */
 	boost::property_tree::read_xml("HistoryOrder.xml", pt, boost::property_tree::xml_parser::trim_whitespace);
 	BOOST_FOREACH(auto &v, pt)
 	{
@@ -85,6 +91,7 @@ void OrderingTickets::AddCancelXml()
 		{
 			if (p.second.get<std::size_t>("<xmlattr>.number") == v.second.size())
 			{
+				/* Add field "Ticket_payment" in order */
 				if(ticketCancel == false)
 				{
 					p.second.put("Ticket_cancel", "No");
@@ -96,6 +103,7 @@ void OrderingTickets::AddCancelXml()
 			}
 		}
 	}
+	/* Update XML */
     write_xml("HistoryOrder.xml", pt, std::locale(),
 		boost::property_tree::xml_writer_make_settings<ptree::key_type>(' ', 4u));
 }
@@ -109,7 +117,7 @@ void OrderingTickets::SetCheckIn(std::string const& str)
 void OrderingTickets::SetCheckIn(std::string const& pNumber, std::string const& str)
 {
 	std::string::size_type sz;
-	placeNumber = std::stoi(pNumber,&sz);
+	placeNumber = std::stoi(pNumber,&sz); // Conversion string to int
 	surname = str;
 	checkIn = true;
 }
@@ -129,9 +137,9 @@ void OrderingTickets::SetPlaceNumber(int pNumber)
 	placeNumber = pNumber;
 }
 
-void OrderingTickets::SetPlaceNumberForHistory(int pNumberForHistory)
+void OrderingTickets::SetTicketNumberForHistory(int pNumberForHistory)
 {
-	placeNumberForHistory = pNumberForHistory;
+	ticketNumberForHistory = pNumberForHistory;
 }
 
 void OrderingTickets::SetCurrent(OrderingSystemState* tPtr)
@@ -179,9 +187,9 @@ int OrderingTickets::GetFlightNumber() const
 	return flightNumber;
 }
 
-int OrderingTickets::GetPlaceNumberForHistory() const
+int OrderingTickets::GetTicketNumberForHistory() const
 {
-	return placeNumberForHistory;
+	return ticketNumberForHistory;
 }
 
 bool OrderingTickets::GetCheckIn() const

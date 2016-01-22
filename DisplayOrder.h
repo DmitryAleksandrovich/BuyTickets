@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DisplayOrder_H
+#define DisplayOrder_H
 #include "OrderingSystemState.h"
 
 class DisplayOrder: public OrderingSystemState
@@ -12,3 +13,4 @@ public:
 	void HistoryOrder(OrderingTickets* tPtr);
 };
 
+#endif // DisplayOrder_H

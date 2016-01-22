@@ -1,4 +1,5 @@
-#pragma once
+#ifndef AcceptanceOrder_H
+#define AcceptanceOrder_H
 #include "OrderingSystemState.h"
 
 class AcceptanceOrder: public OrderingSystemState
@@ -11,3 +12,4 @@ public:
 	void HistoryOrder(OrderingTickets* tPtr);
 };
 
+#endif // AcceptanceOrder_H

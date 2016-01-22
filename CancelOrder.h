@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CancelOrder_H
+#define CancelOrder_H
 #include "OrderingSystemState.h"
 
 class CancelOrder: public OrderingSystemState
@@ -11,3 +12,4 @@ public:
 	void HistoryOrder(OrderingTickets* tPtr);
 };
 
+#endif // CancelOrder_H

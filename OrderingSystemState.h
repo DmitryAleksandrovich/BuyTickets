@@ -1,4 +1,5 @@
-#pragma once
+#ifndef OrderingSystemState_H
+#define OrderingSystemState_H
 #include "OrderingTickets.h"
 #include <iostream>
 #include <string>
@@ -7,6 +8,7 @@
 #include <boost/foreach.hpp>
 
 class OrderingTickets;
+/* Base class of states */
 class OrderingSystemState
 {
 public:
@@ -20,3 +22,4 @@ public:
 	void DisplayHistory(OrderingTickets* tPtr);
 };
 
+#endif // OrderingSystemState_H

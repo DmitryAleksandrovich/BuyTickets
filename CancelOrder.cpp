@@ -15,7 +15,7 @@ CancelOrder::~CancelOrder()
 void CancelOrder::MakeOrder(OrderingTickets* tPtr)
 {
 	std::cout << "How do you want check in: online or offline? Enter 0/1: ";
-	tPtr->SetCurrent(new AcceptanceOrder());
+	tPtr->SetCurrent(new AcceptanceOrder()); // Chage state on "AcceptanceOrder"
 	delete this;
 }
 
@@ -52,7 +52,7 @@ void CancelOrder::ShowOrder(OrderingTickets* tPtr)
 		std::cout << "Ticket cancel: No\n";
 	}
 
-	tPtr->SetCurrent(new DisplayOrder());
+	tPtr->SetCurrent(new DisplayOrder()); // Chage state on "DisplayOrder"
 	delete this;
 }
 
@@ -60,6 +60,6 @@ void CancelOrder::HistoryOrder(OrderingTickets* tPtr)
 {
 	DisplayHistory(tPtr);
 
-	tPtr->SetCurrent(new ShowHistoryOrder());
+	tPtr->SetCurrent(new ShowHistoryOrder()); // Chage state on "ShowHistoryOrder"
 	delete this;
 }

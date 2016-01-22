@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PayOrder_H
+#define PayOrder_H
 #include "OrderingSystemState.h"
 
 class PayOrder: public OrderingSystemState
@@ -12,3 +13,4 @@ public:
 	void HistoryOrder(OrderingTickets* tPtr);
 };
 
+#endif // PayOrder_H

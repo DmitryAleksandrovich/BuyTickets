@@ -1,4 +1,5 @@
-#pragma once
+#ifndef OrderingTickets_H
+#define OrderingTickets_H
 #include "OrderingSystemState.h"
 #include <iostream>
 
@@ -14,36 +15,38 @@ class OrderingTickets
 public:
 	OrderingTickets();
 	~OrderingTickets();
-	void SetCurrent(OrderingSystemState* tPtr);
-	void MakeOrder();
-	void PayBooking();
+	void SetCurrent(OrderingSystemState* tPtr); // Sets the current state
+	void MakeOrder(); // Make order (booking)
+	void PayBooking(); // Payment booking
 	void CancelBooking();
-	void ShowOrder();
-	void HistoryOrder();
-	void SetCheckIn(std::string const& str);
-	void SetCheckIn(std::string const& pNumber, std::string const& str);
+	void ShowOrder(); // Show info about current oreder
+	void HistoryOrder(); // Show history order selected
+	void SetCheckIn(std::string const& str); // Online order
+	void SetCheckIn(std::string const& pNumber, std::string const& str); // Offline order
 	void SetTicketPayment(bool tPayment);
 	void SetTicketCancel(bool tCancel);
 	void SetPlaceNumber(int pNumber);
-	void SetPlaceNumberForHistory(int pNumberForHistory);
+	void SetTicketNumberForHistory(int pNumberForHistory);
 	int GetPlaceNumber() const;
 	std::string GetSurname() const;
 	int GetFlightNumber() const;
 	bool GetCheckIn() const;
 	bool GetTicketPayment() const;
 	bool GetTicketCancel() const;
-	int GetPlaceNumberForHistory() const;
-	void AddOrderXml();
-	void AddPayXml();
-	void AddCancelXml();
+	int GetTicketNumberForHistory() const;
+	void AddOrderXml(); // Add initial order in XML
+	void AddPayXml(); // Add payment booking in XML
+	void AddCancelXml(); // Add cancel booking in XML
 private:
-	class OrderingSystemState* current;
+	class OrderingSystemState* current; // Current state
 	int placeNumber;
 	std::string surname;
-	int flightNumber;
 	bool checkIn;
 	bool ticketPayment;
 	bool ticketCancel;
-	int placeNumberForHistory;
+	int ticketNumberForHistory; // Ticket number to restore order history
+	enum{maxNumberOrder = 10};
+	enum{flightNumber = 312};
 };
 
+#endif // OrderingTickets_H

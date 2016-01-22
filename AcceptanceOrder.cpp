@@ -14,7 +14,7 @@ AcceptanceOrder::~AcceptanceOrder()
 
 void AcceptanceOrder::PayBooking(OrderingTickets* tPtr)
 {
-	tPtr->SetCurrent(new PayOrder());
+	tPtr->SetCurrent(new PayOrder()); // Chage state on "PayOrder"
 	delete this;
 }
 
@@ -51,7 +51,7 @@ void AcceptanceOrder::ShowOrder(OrderingTickets* tPtr)
 		std::cout << "Ticket cancel: No\n";
 	}
 
-	tPtr->SetCurrent(new DisplayOrder());
+	tPtr->SetCurrent(new DisplayOrder()); // Chage state on "DisplayOrder"
 	delete this;
 }
 
@@ -59,7 +59,7 @@ void AcceptanceOrder::HistoryOrder(OrderingTickets* tPtr)
 {
 	DisplayHistory(tPtr);
 
-	tPtr->SetCurrent(new ShowHistoryOrder());
+	tPtr->SetCurrent(new ShowHistoryOrder()); // Chage state on "ShowHistoryOrder"
 	delete this;
 }
 

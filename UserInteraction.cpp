@@ -6,6 +6,7 @@ const int UserInteraction::stateTwo = 2;
 const int UserInteraction::stateThree = 3;
 const int UserInteraction::stateFour = 4;
 const int UserInteraction::maxNumberOrder = 10;
+const int UserInteraction::nulledFactor = -1;
 
 UserInteraction::UserInteraction()
 {
@@ -22,13 +23,15 @@ UserInteraction::~UserInteraction()
 void UserInteraction::ReadDB()
 {
 	using boost::property_tree::ptree;
-	ptree pt;
+	ptree pt; // Create variable to store the tree structure
+	/* Read XML and it write in variable "pt" */
 	boost::property_tree::read_xml("HistoryOrder.xml", pt, boost::property_tree::xml_parser::trim_whitespace);
 	BOOST_FOREACH(auto &v, pt)
 	{
 		BOOST_FOREACH(ptree::value_type &p, v.second)
 		{
-			appNumber++;
+			appNumber++; // Increase the count of the number of orders
+			/* Checks for tag in XML */
 			const boost::optional<std::string>optionalTicketCancel = p.second.get_optional<std::string>("Ticket_cancel");
 			if (!optionalTicketCancel.is_initialized())
 			{
@@ -75,9 +78,9 @@ void UserInteraction::InputMenu(OrderingTickets& ob)
 			cout << "Enter your surname: ";
 			cin >> str;
 			ob.SetCheckIn(pNumber, str);
-			ob.AddOrderXml();
-			busyPlace.push_back(ob.GetPlaceNumber());
-			appNumber++;
+			ob.AddOrderXml(); // Add order information in XML
+			busyPlace.push_back(ob.GetPlaceNumber()); // Add busy place number in vector
+			appNumber++; // Increase the count the number of orders
 			break;
 		}
 		else if(str == "1")
@@ -87,15 +90,15 @@ void UserInteraction::InputMenu(OrderingTickets& ob)
 				if(ob.GetPlaceNumber() == busyPlace[i])
 				{
 					ob.SetPlaceNumber(rand() % maxNumberOrder + 1);
-					i = -1;
+					i = nulledFactor; // In the next iteration i == 0
 				}
 			}
 			cout << "Enter your surname: ";
 			cin >> str;
 			ob.SetCheckIn(str);
-			ob.AddOrderXml();
-			busyPlace.push_back(ob.GetPlaceNumber());
-			appNumber++;
+			ob.AddOrderXml(); // Add order information in XML
+			busyPlace.push_back(ob.GetPlaceNumber()); // Add busy place number in vector
+			appNumber++; // Increase the count the number of orders
 			break;
 		}
 		else
@@ -108,11 +111,11 @@ void UserInteraction::InputMenu(OrderingTickets& ob)
 
 void UserInteraction::PaymentOrder(OrderingTickets& ob)
 {
-	state = stateOne;
+	state = stateOne; // Change state
 	ob.SetTicketPayment(true);
 	ob.SetTicketCancel(false);
-	ob.PayBooking();
-	ob.AddPayXml();
+	ob.PayBooking(); // Payment booking
+	ob.AddPayXml(); // Add payment in XML
 	cout << "Thank you for your order!\n";
 }
 
@@ -120,7 +123,7 @@ void UserInteraction::PreparationOrder(OrderingTickets& ob)
 {
 	ob.SetTicketPayment(false);
 	ob.SetPlaceNumber(rand() % maxNumberOrder + 1);
-	state = stateZero;
+	state = stateZero; // Change state
 	ob.MakeOrder();
 }
 
@@ -143,12 +146,12 @@ void UserInteraction::CheckOnlineFreeSeat(OrderingTickets& ob)
 	}
 }
 
-void UserInteraction::OnlineOrder(OrderingTickets& ob, std::string const& str)
+void UserInteraction::OnlineOrder(OrderingTickets& ob, string const& str)
 {
 	ob.SetCheckIn(pNumber, str);
 	ob.AddOrderXml();
-	busyPlace.push_back(ob.GetPlaceNumber());
-	appNumber++;
+	busyPlace.push_back(ob.GetPlaceNumber()); // Add busy place number in vector
+	appNumber++; // Increase the count the number of orders
 }
 
 void UserInteraction::OfflineOrder(OrderingTickets& ob)
@@ -159,25 +162,25 @@ void UserInteraction::OfflineOrder(OrderingTickets& ob)
 		if(ob.GetPlaceNumber() == busyPlace[i])
 		{
 			ob.SetPlaceNumber(rand() % maxNumberOrder + 1);
-			i = -1;
+			i = nulledFactor; // In the next iteration i == 0
 		}
 	}
 	cout << "Enter your surname: ";
 	cin >> str;
-	busyPlace.push_back(ob.GetPlaceNumber());
+	busyPlace.push_back(ob.GetPlaceNumber()); // Add busy place number in vector
 	ob.SetCheckIn(str);
-	ob.AddOrderXml();
-	appNumber++;
+	ob.AddOrderXml(); // Add offline order in XML
+	appNumber++; // Increase the count the number of orders
 }
 
 void UserInteraction::LohicaCancelOrder(OrderingTickets& ob)
 {
 	busyPlace.erase(busyPlace.end()-1);
-	state = stateTwo;
+	state = stateTwo; // Change state
 	ob.SetTicketCancel(true);
 	ob.SetTicketPayment(false);
 	ob.CancelBooking();
-	ob.AddCancelXml();
+	ob.AddCancelXml(); // Add cancel booking in XML
 	cout << "Thank you! You cancel the order!\n";
 }
 
@@ -190,7 +193,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 	{
 		switch(state)
 		{
-			case 0: // make
+			case stateZero: // State zero: make order
 				cout << "\nTo pay for the ticket, press 1:\n";
 				cout << "To display information to the screen, press 2:\n";
 				cout << "To display the history of the application, press 3:\n";
@@ -227,7 +230,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 					int pNumberForHistory = std::stoi(str,&sz);
 					if(pNumberForHistory >= 1 && pNumberForHistory <= appNumber)
 					{
-						ob.SetPlaceNumberForHistory(pNumberForHistory);
+						ob.SetTicketNumberForHistory(pNumberForHistory);
 						ob.HistoryOrder();	
 					}
 					else
@@ -242,7 +245,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 					continue;
 				}
 				break;
-			case 1: // pay
+			case stateOne: // State one: pay order
 				cout << "\nTo commit the order, press 1:\n";
 				cout << "To cancel the order, press 2:\n";
 				cout << "To display information to the screen, press 3:\n";
@@ -318,7 +321,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 					int pNumberForHistory = std::stoi(str,&sz);
 					if(pNumberForHistory >= 1 && pNumberForHistory <= appNumber)
 					{
-						ob.SetPlaceNumberForHistory(pNumberForHistory);
+						ob.SetTicketNumberForHistory(pNumberForHistory);
 						ob.HistoryOrder();	
 					}
 					else
@@ -333,7 +336,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 					continue;
 				}
 				break;
-			case 2: // cancel
+			case stateTwo: // State two: cancel booking
 				cout << "\nTo commit the order, press 1:\n";
 				cout << "To display information to the screen, press 2:\n";
 				cout << "To display the history of the application, press 3:\n";
@@ -383,7 +386,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 					int pNumberForHistory = std::stoi(str,&sz);
 					if(pNumberForHistory >= 1 && pNumberForHistory <= appNumber)
 					{
-						ob.SetPlaceNumberForHistory(pNumberForHistory);
+						ob.SetTicketNumberForHistory(pNumberForHistory);
 						ob.HistoryOrder();	
 					}
 					else
@@ -398,7 +401,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 					continue;
 				}
 				break;
-			case 3: // display
+			case stateThree: // State three: display information about order
 				cout << "\nTo commit the order, press 1:\n";
 				cout << "To pay for the ticket, press 2:\n";
 				cout << "To cancel the order, press 3:\n";
@@ -486,7 +489,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 					int pNumberForHistory = std::stoi(str,&sz);
 					if(pNumberForHistory >= 1 && pNumberForHistory <= appNumber)
 					{
-						ob.SetPlaceNumberForHistory(pNumberForHistory);
+						ob.SetTicketNumberForHistory(pNumberForHistory);
 						ob.HistoryOrder();	
 					}
 					else
@@ -501,7 +504,7 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 					continue;
 				}
 				break;
-			case 4: // history
+			case stateFour: // State four: display history 
 				cout << "\nTo commit the order, press 1:\n";
 				cout << "To pay for the ticket, press 2:\n";
 				cout << "To cancel the order, press 3:\n";
