@@ -45,7 +45,7 @@ void OrderingSystemState::DisplayHistory(OrderingTickets* tPtr)
 	boost::property_tree::read_xml("HistoryOrder.xml", pt, boost::property_tree::xml_parser::trim_whitespace);
 	std::cout << "\nShow history order\n";
 	BOOST_FOREACH(ptree::value_type &v, pt.get_child("orderList"))
-    {
+    	{
 		if (v.first == "order" &&  v.second.get<std::size_t>("<xmlattr>.number") == tPtr->GetTicketNumberForHistory())
 		{
 			std::cout << "Place number: " << v.second.get<std::string>("Place_number") << '\n'
@@ -61,7 +61,5 @@ void OrderingSystemState::DisplayHistory(OrderingTickets* tPtr)
 				std::cout << "Tichet payment: " << optionalTicketCancel.get() << '\n';
 			}
 		}
-    }
+    	}
 }
-
-
