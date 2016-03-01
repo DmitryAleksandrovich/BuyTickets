@@ -18,7 +18,7 @@ OrderingTickets::~OrderingTickets()
 
 void OrderingTickets::AddOrderXml()
 {
-    using boost::property_tree::ptree;
+	using boost::property_tree::ptree;
 	ptree pt, ptAccessory; // Create variable to store the tree structure
 	/* Read XML and it write in variable "pt" */
 	boost::property_tree::read_xml("HistoryOrder.xml", pt, boost::property_tree::xml_parser::trim_whitespace);
@@ -46,13 +46,13 @@ void OrderingTickets::AddOrderXml()
 		}
 	}
 	/* Update XML */
-    write_xml("HistoryOrder.xml", pt, std::locale(),
+    	write_xml("HistoryOrder.xml", pt, std::locale(),
 		boost::property_tree::xml_writer_make_settings<ptree::key_type>(' ', 4u));
 }
 
 void OrderingTickets::AddPayXml()
 {
-    using boost::property_tree::ptree;
+	using boost::property_tree::ptree;
 	ptree pt;// Create variable to store the tree structure
 	/* Read XML and it write in variable "pt" */
 	boost::property_tree::read_xml("HistoryOrder.xml", pt, boost::property_tree::xml_parser::trim_whitespace);
@@ -75,13 +75,13 @@ void OrderingTickets::AddPayXml()
 		}
 	}
 	/* Update XML */
-    write_xml("HistoryOrder.xml", pt, std::locale(),
+    	write_xml("HistoryOrder.xml", pt, std::locale(),
 		boost::property_tree::xml_writer_make_settings<ptree::key_type>(' ', 4u));
 }
 
 void OrderingTickets::AddCancelXml()
 {
-    using boost::property_tree::ptree;
+    	using boost::property_tree::ptree;
 	ptree pt;// Create variable to store the tree structure
 	/* Read XML and it write in variable "pt" */
 	boost::property_tree::read_xml("HistoryOrder.xml", pt, boost::property_tree::xml_parser::trim_whitespace);
@@ -104,7 +104,7 @@ void OrderingTickets::AddCancelXml()
 		}
 	}
 	/* Update XML */
-    write_xml("HistoryOrder.xml", pt, std::locale(),
+    	write_xml("HistoryOrder.xml", pt, std::locale(),
 		boost::property_tree::xml_writer_make_settings<ptree::key_type>(' ', 4u));
 }
 
