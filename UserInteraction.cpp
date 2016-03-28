@@ -1,18 +1,12 @@
 #include "UserInteraction.h"
 
-const int UserInteraction::stateZero = 0;
-const int UserInteraction::stateOne = 1;
-const int UserInteraction::stateTwo = 2;
-const int UserInteraction::stateThree = 3;
-const int UserInteraction::stateFour = 4;
+using namespace std;
+
 const int UserInteraction::maxNumberOrder = 10;
 const int UserInteraction::nulledFactor = -1;
 
-UserInteraction::UserInteraction()
+UserInteraction::UserInteraction() : appNumber(stateZero), state(stateZero), correctData(true)
 {
-	appNumber = stateZero;
-	state = stateZero;
-	correctData = true;
 }
 
 
