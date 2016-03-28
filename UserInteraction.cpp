@@ -24,7 +24,7 @@ void UserInteraction::ReadDB()
 	{
 		BOOST_FOREACH(ptree::value_type &p, v.second)
 		{
-			appNumber++; // Increase the count of the number of orders
+			++appNumber; // Increase the count of the number of orders
 			/* Checks for tag in XML */
 			const boost::optional<std::string>optionalTicketCancel = p.second.get_optional<std::string>("Ticket_cancel");
 			if (!optionalTicketCancel.is_initialized())
@@ -74,7 +74,7 @@ void UserInteraction::InputMenu(OrderingTickets& ob)
 			ob.SetCheckIn(pNumber, str);
 			ob.AddOrderXml(); // Add order information in XML
 			busyPlace.push_back(ob.GetPlaceNumber()); // Add busy place number in vector
-			appNumber++; // Increase the count the number of orders
+			++appNumber; // Increase the count the number of orders
 			break;
 		}
 		else if(str == "1")
@@ -92,7 +92,7 @@ void UserInteraction::InputMenu(OrderingTickets& ob)
 			ob.SetCheckIn(str);
 			ob.AddOrderXml(); // Add order information in XML
 			busyPlace.push_back(ob.GetPlaceNumber()); // Add busy place number in vector
-			appNumber++; // Increase the count the number of orders
+			++appNumber; // Increase the count the number of orders
 			break;
 		}
 		else
