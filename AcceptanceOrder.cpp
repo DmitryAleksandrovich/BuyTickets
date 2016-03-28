@@ -24,29 +24,29 @@ void AcceptanceOrder::ShowOrder(OrderingTickets* tPtr)
 	std::cout << "Place number: " << tPtr->GetPlaceNumber() << '\n';
 	std::cout << "Surname: " << tPtr->GetSurname() << '\n';
 	std::cout << "Flight number: " << tPtr->GetFlightNumber() << '\n';
-	if(tPtr->GetCheckIn() == 1)
+	if(tPtr->GetCheckIn())
 	{
 		std::cout << "Check in online\n";
 	}
-	else if(tPtr->GetCheckIn() == 0)
+	else if(!tPtr->GetCheckIn())
 	{
 		std::cout << "Check in offline\n";
 	}
 
-	if(tPtr->GetTicketPayment() == 1)
+	if(tPtr->GetTicketPayment())
 	{
 		std::cout << "Ticket payment: Yes\n";
 	}
-	else if(tPtr->GetTicketPayment() == 0)
+	else if(!tPtr->GetTicketPayment())
 	{
 		std::cout << "Ticket payment: No\n";
 	}
 
-	if(tPtr->GetTicketCancel() == 1)
+	if(tPtr->GetTicketCancel())
 	{
 		std::cout << "Ticket cancel: Yes\n";
 	}
-	else if(tPtr->GetTicketCancel() == 0)
+	else if(!tPtr->GetTicketCancel())
 	{
 		std::cout << "Ticket cancel: No\n";
 	}

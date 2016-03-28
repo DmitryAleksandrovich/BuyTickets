@@ -2,13 +2,9 @@
 #include "AcceptanceOrder.h"
 #include <string>
 
-OrderingTickets::OrderingTickets()
+OrderingTickets::OrderingTickets() : placeNumber(std::rand() % maxNumberOrder + 1), checkIn(false),
+	ticketPayment(false), ticketCancel(false), current(new AcceptanceOrder())
 {
-	placeNumber = std::rand() % maxNumberOrder + 1;
-	checkIn = false;
-	ticketPayment = false;
-	ticketCancel = false;
-	current = new AcceptanceOrder(); // The initial state
 }
 
 OrderingTickets::~OrderingTickets()
@@ -34,11 +30,11 @@ void OrderingTickets::AddOrderXml()
 				p.second.add("Place_number", placeNumber);
 				p.second.add("Surname", surname);
 				p.second.add("Flight_number", flightNumber);
-				if(checkIn == false)
+				if(!checkIn)
 				{
 					p.second.add("Check_in_online", "No");
 				}
-				else if(checkIn == true)
+				else if(checkIn)
 				{
 					p.second.add("Check_in_online", "Yes");
 				}
@@ -63,11 +59,11 @@ void OrderingTickets::AddPayXml()
 			if (p.second.get<std::size_t>("<xmlattr>.number") == v.second.size())
 			{
 				/* Add field "Ticket_payment" in order */
-				if(ticketPayment == false)
+				if(!ticketPayment)
 				{
 					p.second.put("Ticket_payment", "No");
 				}
-				else if(ticketPayment == true)
+				else if(ticketPayment)
 				{
 					p.second.put("Ticket_payment", "Yes");
 				}
@@ -92,11 +88,11 @@ void OrderingTickets::AddCancelXml()
 			if (p.second.get<std::size_t>("<xmlattr>.number") == v.second.size())
 			{
 				/* Add field "Ticket_payment" in order */
-				if(ticketCancel == false)
+				if(!ticketCancel)
 				{
 					p.second.put("Ticket_cancel", "No");
 				}
-				else if(ticketCancel == true)
+				else if(ticketCancel)
 				{
 					p.second.put("Ticket_cancel", "Yes");
 				}
