@@ -38,29 +38,29 @@ void ShowHistoryOrder::ShowOrder(OrderingTickets* tPtr)
 	std::cout << "Place number: " << tPtr->GetPlaceNumber() << '\n';
 	std::cout << "Surname: " << tPtr->GetSurname() << '\n';
 	std::cout << "Flight number: " << tPtr->GetFlightNumber() << '\n';
-	if(tPtr->GetCheckIn() == true)
+	if(tPtr->GetCheckIn() == 1)
 	{
 		std::cout << "Check in online\n";
 	}
-	else if(tPtr->GetCheckIn() == false)
+	else if(tPtr->GetCheckIn() == 0)
 	{
 		std::cout << "Check in offline\n";
 	}
 
-	if(tPtr->GetTicketPayment() == true)
+	if(tPtr->GetTicketPayment() == 1)
 	{
 		std::cout << "Ticket payment: Yes\n";
 	}
-	else if(tPtr->GetTicketPayment() == false)
+	else if(tPtr->GetTicketPayment() == 0)
 	{
 		std::cout << "Ticket payment: No\n";
 	}
 
-	if(tPtr->GetTicketCancel() == true)
+	if(tPtr->GetTicketCancel() == 1)
 	{
 		std::cout << "Ticket cancel: Yes\n";
 	}
-	else if(tPtr->GetTicketCancel() == false)
+	else if(tPtr->GetTicketCancel() == 0)
 	{
 		std::cout << "Ticket cancel: No\n";
 	}
