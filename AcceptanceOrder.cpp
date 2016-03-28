@@ -28,7 +28,7 @@ void AcceptanceOrder::ShowOrder(OrderingTickets* tPtr)
 	{
 		std::cout << "Check in online\n";
 	}
-	else if(tPtr->GetCheckIn() == -)
+	else if(tPtr->GetCheckIn() == 0)
 	{
 		std::cout << "Check in offline\n";
 	}
