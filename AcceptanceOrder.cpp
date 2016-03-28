@@ -12,13 +12,12 @@ AcceptanceOrder::~AcceptanceOrder()
 {
 }
 
-void AcceptanceOrder::PayBooking(OrderingTickets* tPtr)
+void AcceptanceOrder::PayBooking(std::tr1::shared_ptr<OrderingTickets> tPtr)
 {
 	tPtr->SetCurrent(new PayOrder()); // Chage state on "PayOrder"
-	delete this;
 }
 
-void AcceptanceOrder::ShowOrder(OrderingTickets* tPtr)
+void AcceptanceOrder::ShowOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
 {
 	std::cout << "\nDisplay order\n";
 	std::cout << "Place number: " << tPtr->GetPlaceNumber() << '\n';
@@ -52,15 +51,13 @@ void AcceptanceOrder::ShowOrder(OrderingTickets* tPtr)
 	}
 
 	tPtr->SetCurrent(new DisplayOrder()); // Chage state on "DisplayOrder"
-	delete this;
 }
 
-void AcceptanceOrder::HistoryOrder(OrderingTickets* tPtr)
+void AcceptanceOrder::HistoryOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
 {
 	DisplayHistory(tPtr);
 
 	tPtr->SetCurrent(new ShowHistoryOrder()); // Chage state on "ShowHistoryOrder"
-	delete this;
 }
 
 

@@ -7,9 +7,9 @@ class AcceptanceOrder: public OrderingSystemState
 public:
 	AcceptanceOrder();
 	~AcceptanceOrder();
-	void PayBooking(OrderingTickets* tPtr);
-	void ShowOrder(OrderingTickets* tPtr);
-	void HistoryOrder(OrderingTickets* tPtr);
+	void PayBooking(std::tr1::shared_ptr<OrderingTickets> tPtr);
+	void ShowOrder(std::tr1::shared_ptr<OrderingTickets> tPtr);
+	void HistoryOrder(std::tr1::shared_ptr<OrderingTickets> tPtr);
 };
 
 #endif // AcceptanceOrder_H

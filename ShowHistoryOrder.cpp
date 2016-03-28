@@ -13,26 +13,23 @@ ShowHistoryOrder::~ShowHistoryOrder()
 {
 }
 
-void ShowHistoryOrder::MakeOrder(OrderingTickets* tPtr)
+void ShowHistoryOrder::MakeOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
 {
 	std::cout << "How do you want check in: online or offline? Enter 0/1: ";
 	tPtr->SetCurrent(new AcceptanceOrder()); // Chage state on "AcceptanceOrder"
-	delete this;
 }
 
-void ShowHistoryOrder::PayBooking(OrderingTickets* tPtr)
+void ShowHistoryOrder::PayBooking(std::tr1::shared_ptr<OrderingTickets> tPtr)
 {
 	tPtr->SetCurrent(new PayOrder()); // Chage state on "PayOrder"
-	delete this;
 }
 
-void ShowHistoryOrder::CancelBooking(OrderingTickets* tPtr)
+void ShowHistoryOrder::CancelBooking(std::tr1::shared_ptr<OrderingTickets> tPtr)
 {
 	tPtr->SetCurrent(new CancelOrder()); // Chage state on "CancelOrder"
-	delete this;
 }
 
-void ShowHistoryOrder::ShowOrder(OrderingTickets* tPtr)
+void ShowHistoryOrder::ShowOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
 {
 	std::cout << "\nDisplay order\n";
 	std::cout << "Place number: " << tPtr->GetPlaceNumber() << '\n';
@@ -66,5 +63,4 @@ void ShowHistoryOrder::ShowOrder(OrderingTickets* tPtr)
 	}
 
 	tPtr->SetCurrent(new DisplayOrder()); // Chage state on "DisplayOrder"
-	delete this;
 }

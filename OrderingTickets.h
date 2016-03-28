@@ -2,6 +2,7 @@
 #define OrderingTickets_H
 #include "OrderingSystemState.h"
 #include <iostream>
+#include <memory>
 
 class OrderingSystemState;
 class AcceptanceOrder;
@@ -39,6 +40,7 @@ public:
 	void AddCancelXml(); // Add cancel booking in XML
 private:
 	class OrderingSystemState* current; // Current state
+	std::tr1::shared_ptr<OrderingTickets>otPtr;
 	int placeNumber;
 	std::string surname;
 	bool checkIn;

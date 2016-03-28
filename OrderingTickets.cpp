@@ -3,7 +3,7 @@
 #include <string>
 
 OrderingTickets::OrderingTickets() : placeNumber(std::rand() % maxNumberOrder + 1), checkIn(false),
-	ticketPayment(false), ticketCancel(false), current(new AcceptanceOrder())
+	ticketPayment(false), ticketCancel(false), current(new AcceptanceOrder()), otPtr(this)
 {
 }
 
@@ -145,27 +145,27 @@ void OrderingTickets::SetCurrent(OrderingSystemState* tPtr)
 
 void OrderingTickets::MakeOrder()
 {
-	current->MakeOrder(this);
+	current->MakeOrder(otPtr);
 }
 
 void OrderingTickets::PayBooking()
 {
-	current->PayBooking(this);
+	current->PayBooking(otPtr);
 }
 
 void OrderingTickets::CancelBooking()
 {
-	current->CancelBooking(this);
+	current->CancelBooking(otPtr);
 }
 
 void OrderingTickets::ShowOrder()
 {
-	current->ShowOrder(this);
+	current->ShowOrder(otPtr);
 }
 
 void OrderingTickets::HistoryOrder()
 {
-	current->HistoryOrder(this);
+	current->HistoryOrder(otPtr);
 }
 
 int OrderingTickets::GetPlaceNumber() const

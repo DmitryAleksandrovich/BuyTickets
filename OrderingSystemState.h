@@ -3,6 +3,7 @@
 #include "OrderingTickets.h"
 #include <iostream>
 #include <string>
+#include <memory>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
@@ -14,12 +15,12 @@ class OrderingSystemState
 public:
 	OrderingSystemState();
 	virtual ~OrderingSystemState();
-	virtual void MakeOrder(OrderingTickets* tPtr);
-	virtual void PayBooking(OrderingTickets* tPtr);
-	virtual void CancelBooking(OrderingTickets* tPtr);
-	virtual void ShowOrder(OrderingTickets* tPtr);
-	virtual void HistoryOrder(OrderingTickets* tPtr);
-	void DisplayHistory(OrderingTickets* tPtr);
+	virtual void MakeOrder(std::tr1::shared_ptr<OrderingTickets> tPtr);
+	virtual void PayBooking(std::tr1::shared_ptr<OrderingTickets> tPtr);
+	virtual void CancelBooking(std::tr1::shared_ptr<OrderingTickets> tPtr);
+	virtual void ShowOrder(std::tr1::shared_ptr<OrderingTickets> tPtr);
+	virtual void HistoryOrder(std::tr1::shared_ptr<OrderingTickets> tPtr);
+	void DisplayHistory(std::tr1::shared_ptr<OrderingTickets> tPtr);
 };
 
 #endif // OrderingSystemState_H

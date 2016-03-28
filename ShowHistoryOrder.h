@@ -7,10 +7,10 @@ class ShowHistoryOrder: public OrderingSystemState
 public:
 	ShowHistoryOrder();
 	~ShowHistoryOrder();
-	void MakeOrder(OrderingTickets* tPtr);
-	void PayBooking(OrderingTickets* tPtr);
-	void CancelBooking(OrderingTickets* tPtr);
-	void ShowOrder(OrderingTickets* tPtr);
+	void MakeOrder(std::tr1::shared_ptr<OrderingTickets> tPtr);
+	void PayBooking(std::tr1::shared_ptr<OrderingTickets> tPtr);
+	void CancelBooking(std::tr1::shared_ptr<OrderingTickets> tPtr);
+	void ShowOrder(std::tr1::shared_ptr<OrderingTickets> tPtr);
 };
 
 #endif // ShowHistoryOrder_H
