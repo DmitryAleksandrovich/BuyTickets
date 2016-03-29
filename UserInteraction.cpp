@@ -248,6 +248,8 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 				cin >> str;
 				if(str == "1")
 				{
+					ob.SetTicketPayment(false);
+					ob.SetTicketCancel(false);
 					if(busyPlace.size() == maxNumberOrder)
 					{
 						cout << "Not free place!\n";
@@ -338,6 +340,8 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 				cin >> str;
 				if(str == "1")
 				{
+					ob.SetTicketPayment(false);
+					ob.SetTicketCancel(false);
 					if(busyPlace.size() == maxNumberOrder)
 					{
 						cout << "Not free place!\n";
@@ -404,6 +408,8 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 				cin >> str;
 				if(str == "1")
 				{
+					ob.SetTicketPayment(false);
+					ob.SetTicketCancel(false);
 					if(busyPlace.size() == maxNumberOrder)
 					{
 						cout << "Not free place!\n";
@@ -507,6 +513,8 @@ void UserInteraction::ShowInfo(OrderingTickets& ob)
 				cin >> str;
 				if(str == "1")
 				{
+					ob.SetTicketPayment(false);
+					ob.SetTicketCancel(false);
 					if(busyPlace.size() == maxNumberOrder)
 					{
 						cout << "Not free place!\n";
