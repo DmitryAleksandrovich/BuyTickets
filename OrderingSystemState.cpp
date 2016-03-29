@@ -12,28 +12,28 @@ OrderingSystemState::~OrderingSystemState()
 
 void OrderingSystemState::MakeOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
 {
-	std::cout << "Already Make Order\n";
+	assert(false);
 }
 
 void OrderingSystemState::PayBooking(std::tr1::shared_ptr<OrderingTickets> tPtr)
 {
-	std::cout << "Already Pay Booking\n";
+	assert(false);
 }
 
 void OrderingSystemState::CancelBooking(std::tr1::shared_ptr<OrderingTickets> tPtr)
 {
-	std::cout << "Already Cancel Booking\n";
+	assert(false);
 }
 
 void OrderingSystemState::ShowOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
 {
-	std::cout << "Already Show Order\n";
+	assert(false);
 }
 
 
 void OrderingSystemState::HistoryOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
 {
-	std::cout << "Already History Order\n";
+	assert(false);
 }
 
 /* Disaplay history order by number */
