@@ -7,9 +7,9 @@ class AcceptanceOrder: public OrderingSystemState
 public:
 	AcceptanceOrder();
 	~AcceptanceOrder();
-	void PayBooking(std::tr1::shared_ptr<OrderingTickets> tPtr) override;
-	void ShowOrder(std::tr1::shared_ptr<OrderingTickets> tPtr) override;
-	void HistoryOrder(std::tr1::shared_ptr<OrderingTickets> tPtr) override;
+	void PayBooking(shared_ptr<OrderingTickets> tPtr) override;
+	void ShowOrder(shared_ptr<OrderingTickets> tPtr) override;
+	void HistoryOrder(shared_ptr<OrderingTickets> tPtr) override;
 };
 
 #endif // AcceptanceOrder_H

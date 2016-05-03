@@ -10,34 +10,34 @@ OrderingSystemState::~OrderingSystemState()
 {
 }
 
-void OrderingSystemState::MakeOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
+void OrderingSystemState::MakeOrder(shared_ptr<OrderingTickets> tPtr)
 {
 	assert(false);
 }
 
-void OrderingSystemState::PayBooking(std::tr1::shared_ptr<OrderingTickets> tPtr)
+void OrderingSystemState::PayBooking(shared_ptr<OrderingTickets> tPtr)
 {
 	assert(false);
 }
 
-void OrderingSystemState::CancelBooking(std::tr1::shared_ptr<OrderingTickets> tPtr)
+void OrderingSystemState::CancelBooking(shared_ptr<OrderingTickets> tPtr)
 {
 	assert(false);
 }
 
-void OrderingSystemState::ShowOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
+void OrderingSystemState::ShowOrder(shared_ptr<OrderingTickets> tPtr)
 {
 	assert(false);
 }
 
 
-void OrderingSystemState::HistoryOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
+void OrderingSystemState::HistoryOrder(shared_ptr<OrderingTickets> tPtr)
 {
 	assert(false);
 }
 
 /* Disaplay history order by number */
-void OrderingSystemState::DisplayHistory(std::tr1::shared_ptr<OrderingTickets> tPtr)
+void OrderingSystemState::DisplayHistory(shared_ptr<OrderingTickets> tPtr)
 {
 	using boost::property_tree::ptree;
 	ptree pt; // Create variable to store the tree structure

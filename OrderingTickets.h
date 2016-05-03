@@ -4,6 +4,8 @@
 #include <iostream>
 #include <memory>
 
+using std::tr1::shared_ptr;
+
 class OrderingSystemState;
 class AcceptanceOrder;
 class PayOrder;
@@ -40,7 +42,7 @@ public:
 	void AddCancelXml(); // Add cancel booking in XML
 private:
 	class OrderingSystemState* current; // Current state
-	std::tr1::shared_ptr<OrderingTickets>otPtr;
+	shared_ptr<OrderingTickets>otPtr;
 	int placeNumber;
 	std::string surname;
 	bool checkIn;

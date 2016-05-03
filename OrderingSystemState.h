@@ -9,6 +9,8 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
 
+using std::tr1::shared_ptr;
+
 class OrderingTickets;
 /* Base class of states */
 class OrderingSystemState
@@ -16,12 +18,12 @@ class OrderingSystemState
 public:
 	OrderingSystemState();
 	virtual ~OrderingSystemState();
-	virtual void MakeOrder(std::tr1::shared_ptr<OrderingTickets> tPtr);
-	virtual void PayBooking(std::tr1::shared_ptr<OrderingTickets> tPtr);
-	virtual void CancelBooking(std::tr1::shared_ptr<OrderingTickets> tPtr);
-	virtual void ShowOrder(std::tr1::shared_ptr<OrderingTickets> tPtr);
-	virtual void HistoryOrder(std::tr1::shared_ptr<OrderingTickets> tPtr);
-	void DisplayHistory(std::tr1::shared_ptr<OrderingTickets> tPtr);
+	virtual void MakeOrder(shared_ptr<OrderingTickets> tPtr);
+	virtual void PayBooking(shared_ptr<OrderingTickets> tPtr);
+	virtual void CancelBooking(shared_ptr<OrderingTickets> tPtr);
+	virtual void ShowOrder(shared_ptr<OrderingTickets> tPtr);
+	virtual void HistoryOrder(shared_ptr<OrderingTickets> tPtr);
+	void DisplayHistory(shared_ptr<OrderingTickets> tPtr);
 };
 
 #endif // OrderingSystemState_H
