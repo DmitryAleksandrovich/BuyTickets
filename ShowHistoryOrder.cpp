@@ -39,7 +39,7 @@ void ShowHistoryOrder::ShowOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
 	{
 		std::cout << "Check in online\n";
 	}
-	else if(!tPtr->GetCheckIn())
+	else
 	{
 		std::cout << "Check in offline\n";
 	}
@@ -48,7 +48,7 @@ void ShowHistoryOrder::ShowOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
 	{
 		std::cout << "Ticket payment: Yes\n";
 	}
-	else if(!tPtr->GetTicketPayment())
+	else
 	{
 		std::cout << "Ticket payment: No\n";
 	}
@@ -57,7 +57,7 @@ void ShowHistoryOrder::ShowOrder(std::tr1::shared_ptr<OrderingTickets> tPtr)
 	{
 		std::cout << "Ticket cancel: Yes\n";
 	}
-	else if(!tPtr->GetTicketCancel())
+	else
 	{
 		std::cout << "Ticket cancel: No\n";
 	}
